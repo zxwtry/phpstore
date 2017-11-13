@@ -12,6 +12,14 @@
         向服务器注册用户的会话，同时为用户会话分配一个SID
     */
 
+    /*
+        销毁会话：
+            使用unset()或session_destroy()函数
+        例如：
+            unset($_SESSION['season'])
+            session_destroy();      //重置session
+     */
+
     if (isset($_POST['submit'])) {
         session_start();
         $_SESSION['season'] = $_POST['season'];
