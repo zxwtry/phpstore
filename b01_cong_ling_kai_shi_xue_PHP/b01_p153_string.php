@@ -185,3 +185,8 @@ function b01_p153_string_iconv() {
 //b01_p153_string_str_replace2();
 //b01_p153_string_strpos2();
 //b01_p153_string_explode();
+
+$ua = "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MALCJS; rv:11.0) like Gecko";
+//$ua = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko";
+
+exit(strpos($ua, "Windows") > 0 && strpos($ua, "like Gecko") > 0);
