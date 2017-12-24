@@ -210,3 +210,4 @@ function b01_p196_xml_rss() {
 //b01_p196_xml_simple_load_string();
 //b01_p196_xml_foreach();
 //b01_p196_xml_save();
+//b01_p196_xml_rss();
