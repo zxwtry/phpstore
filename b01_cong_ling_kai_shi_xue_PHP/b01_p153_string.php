@@ -34,10 +34,13 @@ function b01_p153_string_mb() {
     echo "<br />";
     echo mb_strlen("你好世界aabb", "GB2312");
     echo "<br />";
+    echo mb_strlen("你好世界aabb");
+    echo "<br />";
     /*
         UTF-8
         8
         11
+        8
      */
 }
 
@@ -186,7 +189,7 @@ function b01_p153_string_iconv() {
 //b01_p153_string_strpos2();
 //b01_p153_string_explode();
 
-$ua = "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MALCJS; rv:11.0) like Gecko";
+//$ua = "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; MALCJS; rv:11.0) like Gecko";
 //$ua = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko";
 
-exit(strpos($ua, "Windows") > 0 && strpos($ua, "like Gecko") > 0);
+//exit(strpos($ua, "Windows") > 0 && strpos($ua, "like Gecko") > 0);

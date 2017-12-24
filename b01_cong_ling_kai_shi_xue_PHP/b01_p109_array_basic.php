@@ -106,8 +106,60 @@ function b01_p115_array_basic_foreach() {
 }
 
 
+/*
+ *  foreach修改数组
+ */
+function b01_p115_array_basic_foreach_edit() {
+    $arr = array(
+        "arr1" => array("key" => "value1"),
+        "arr2" => array("key" => "value2"),
+    );
+
+    foreach ($arr as $one) {
+        $one["key"] = "byte";
+    }
+    echo "<pre>";
+    var_dump($arr);
+
+    foreach ($arr as $key => $val) {
+        $val["key"] = "byte";
+        $arr[$key] = $val;
+    }
+    echo "<pre>";
+    var_dump($arr);
+
+    /*
+        array(2) {
+          ["arr1"]=>
+          array(1) {
+            ["key"]=>
+            string(6) "value1"
+          }
+          ["arr2"]=>
+          array(1) {
+            ["key"]=>
+            string(6) "value2"
+          }
+        }
+        array(2) {
+          ["arr1"]=>
+          array(1) {
+            ["key"]=>
+            string(4) "byte"
+          }
+          ["arr2"]=>
+          array(1) {
+            ["key"]=>
+            string(4) "byte"
+          }
+        }
+     */
+}
+
+
 //b01_p111_array_basic_create();
 //b01_p111_array_basic_unset();
 //b01_p111_array_basic_array_push_pop();
 //b01_p115_array_basic_for();
 //b01_p115_array_basic_foreach();
+//b01_p115_array_basic_foreach_edit();
