@@ -239,8 +239,9 @@ function b01_p207_regex_chinese_character() {
     $pattern_gbk = "/^[" . chr(0xa1) . "-" . chr(0xff) . "]+$/";
     $pattern_utf8 = "/^[\x{4e00}-\x{9fa5}]+$/u";
     $characters = array(
-        "你",
-        "hello"
+        "你好世界",
+        "hello",
+        "こんにちは",    //你好日语
     );
     foreach($characters as $character) {
         if (preg_match($pattern_utf8, $character)) {
@@ -258,6 +259,14 @@ function b01_p207_regex_chinese_character() {
             echo "not matches " . $character . "<br>";
         }
     }
+    /*
+        matches 你好世界
+        not matches hello
+        not matches こんにちは
+        matches 你好世界
+        not matches hello
+        matches こんにちは
+     */
 
 }
 
@@ -267,3 +276,5 @@ function b01_p207_regex_chinese_character() {
 //b01_p207_regex_email();
 //b01_p207_regex_telphone();
 //b01_p207_regex_chinese_character();
+
+
