@@ -72,19 +72,102 @@
             xmlHttp.send(data);
         }
 
-    7，
+    7， 注意：在使用POST方式提交数据时，需要使用
+        setRequestHeader()函数发送特定的header
+
+    8， XmlHttpRequest的readyState数值和意义
+        0   对象已建立，但尚未初始化（尚未调用open方法）
+        1   对象已建立，但尚未调用send方法
+        2   send方法已经调用，当前的状态及HTTP头未知
+        3   已接收部分数据，响应及HTTP头不全，这时通过responseBody和
+            responseText获取部分数据会出现错误
+        4   数据接收完毕，可以通过responseBody和responseText获取完整的回应数据
+
+        function callBack() {
+            if (xmlHttp.readyState == 4) {
+                var resp = xmlHttp.responseText;
+                console.log(resp);
+            }
+        }
  */
 
 
 /*
-    异步发送请求
-    1，
+    基于Ajax的用户名验证程序
  */
 
-
+if (isset($_GET["submit"])) {
+    header("Content-Type: text/html; charset=UTF-8");
+    if ($_POST["username"] == "php" && $_POST["password"] == "123") {
+        echo "欢迎来到PHP";
+    } else {
+        echo "用户名或密码错误";
+    }
+}
 ?>
 
 <script type="text/javascript">
-    var xmlHttp = new XMLHttpRequest();
+    function getXmlHttpRequest() {
+        var xmlHttp = null;
+        try {
+            xmlHttp = new XMLHttpRequest();
+        } catch (e) {
+            try {
+                xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {
+                try {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (e) {
+                    xmlHttp = false;
+                }
+            }
+        }
+        return xmlHttp;
+    }
+
+    
+    function sendRequest(url, call_back, data) {
+        var data = data || "";
+        xmlHttp.onreadystatechange = call_back;
+        if (data != "") {
+            xmlHttp.open("POST", url, true);
+            xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlHttp.setRequestHeader("Content-length", data.length);
+            xmlHttp.setRequestHeader("Connection", "close");
+        } else {
+            xmlHttp.open("GET", url, true);
+        }
+        xmlHttp.send(data);
+    }
+    
+    
+    function callBack() {
+        if (xmlHttp.readyState == 4) {
+            var response = xmlHttp.responseText;
+            console.log(response);
+        }
+    }
+
+
+    var xmlHttp = getXmlHttpRequest();
+
+
+    function AJAXRequest() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        sendRequest("b01_p223_ajax.php?submit=1", callBack, "username=" + username + "&password=" + password);
+    }
 
 </script>
+
+<form method="post" action="">
+    <p>
+        用户名：<input type="text" name="username" id="username">
+    </p>
+    <p>
+        密码：<input type="text" name="password" id="password">
+    </p>
+    <p>
+        <input type="button" onclick="AJAXRequest()" value="开始验证">
+    </p>
+</form>
